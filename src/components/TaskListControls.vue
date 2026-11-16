@@ -4,9 +4,11 @@ defineProps({
   status: { type: String, default: 'all' },
   priority: { type: String, default: 'all' },
   sort: { type: String, default: 'newest' },
+  project: { type: String, default: 'all' },
+  projects: { type: Array, required: true },
   unfinished: { type: Boolean, default: false },
 })
-const emit = defineEmits(['update:search', 'update:status', 'update:priority', 'update:sort', 'update:unfinished', 'reset'])
+const emit = defineEmits(['update:search', 'update:status', 'update:priority', 'update:sort', 'update:project', 'update:unfinished', 'reset'])
 </script>
 <template>
   <section class="tf5-panel" aria-label="Пошук і фільтри">
@@ -35,6 +37,12 @@ const emit = defineEmits(['update:search', 'update:status', 'update:priority', '
           <option value="low">Низький</option>
           <option value="medium">Середній</option>
           <option value="high">Високий</option>
+        </select>
+      </label>
+      <label>Проєкт
+        <select :value="project" @change="emit('update:project', $event.target.value)">
+          <option value="all">Усі проєкти</option>
+          <option v-for="item in projects" :key="item.id" :value="item.id">{{ item.title }}</option>
         </select>
       </label>
       <label>Сортування

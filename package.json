@@ -1,5 +1,5 @@
 {
-  "name": "taskflow-kp-2-6",
+  "name": "taskflow-kp-2-9",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -13,7 +13,9 @@
     "vue": "^3.5.22",
     "framework7": "^8.3.4",
     "framework7-vue": "^8.3.4",
-    "framework7-icons": "^5.0.5"
+    "framework7-icons": "^5.0.5",
+    "pinia": "^3.0.3",
+    "@vue/devtools-api": "^8.0.3"
   },
   "devDependencies": {
     "@vite-pwa/assets-generator": "^1.0.2",

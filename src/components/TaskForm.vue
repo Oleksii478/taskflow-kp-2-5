@@ -1,7 +1,7 @@
 <script setup>
 import { computed, reactive, ref } from 'vue'
 
-const props = defineProps({ task: { type: Object, default: null } })
+const props = defineProps({ task: { type: Object, default: null }, projects: { type: Array, required: true } })
 const emit = defineEmits(['save', 'cancel'])
 const form = reactive({
   title: props.task?.title ?? '',
@@ -9,6 +9,7 @@ const form = reactive({
   status: props.task?.status ?? 'todo',
   priority: props.task?.priority ?? 'medium',
   dueDate: props.task?.dueDate ?? '',
+  projectId: props.task?.projectId ?? 'general',
 })
 const showErrors = ref(false)
 const isEditing = computed(() => props.task !== null)
@@ -32,13 +33,14 @@ const errors = computed(() => {
   if (!['todo', 'progress', 'done'].includes(form.status)) result.status = 'Оберіть коректний статус.'
   if (!['low', 'medium', 'high'].includes(form.priority)) result.priority = 'Оберіть коректний пріоритет.'
   if (!isValidDate(form.dueDate)) result.dueDate = 'Укажіть коректну дату завершення.'
+  if (!props.projects.some(p => p.id === form.projectId)) result.projectId = 'Оберіть проєкт зі списку.'
   return result
 })
 function submitForm() {
   showErrors.value = true
   if (Object.keys(errors.value).length) return
   emit('save', { title: form.title.trim(), description: form.description.trim(),
-    status: form.status, priority: form.priority, dueDate: form.dueDate })
+    status: form.status, priority: form.priority, dueDate: form.dueDate, projectId: form.projectId })
 }
 function resetForm() {
   form.title = ''
@@ -46,6 +48,7 @@ function resetForm() {
   form.status = 'todo'
   form.priority = 'medium'
   form.dueDate = ''
+  form.projectId = 'general'
   showErrors.value = false
 }
 </script>
@@ -86,6 +89,13 @@ function resetForm() {
         </select>
         <p v-if="showErrors && errors.priority" class="tf4-error">{{ errors.priority }}</p>
       </div>
+      <div class="tf4-field">
+        <label for="tf4-project">Проєкт *</label>
+        <select id="tf4-project" v-model="form.projectId" :aria-invalid="showErrors && !!errors.projectId">
+          <option v-for="project in projects" :key="project.id" :value="project.id">{{ project.title }}</option>
+        </select>
+        <p v-if="showErrors && errors.projectId" class="tf4-error">{{ errors.projectId }}</p>
+      </div>
       <div class="tf4-field tf4-field--wide">
         <label for="tf4-date">Дата завершення *</label>
         <input id="tf4-date" v-model="form.dueDate" type="date" :aria-invalid="showErrors && !!errors.dueDate" aria-describedby="tf4-date-error" />
@@ -94,7 +104,7 @@ function resetForm() {
       <div class="tf4-preview tf4-field--wide" aria-live="polite">
         <strong>Попередній перегляд</strong>
         <p>{{ form.title || 'Назва нового завдання' }}</p>
-        <span>{{ statusLabels[form.status] }} · {{ priorityLabels[form.priority] }}</span>
+        <span>{{ statusLabels[form.status] }} · {{ priorityLabels[form.priority] }} · {{ projects.find(p => p.id === form.projectId)?.title ?? 'Загальні' }}</span>
       </div>
       <div class="tf4-actions tf4-field--wide">
         <button class="tf4-save" type="submit">{{ isEditing ? 'Зберегти зміни' : 'Створити завдання' }}</button>
