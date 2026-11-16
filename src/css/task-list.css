@@ -1,0 +1,17 @@
+/* КП 2.8: Пошук, сортування та видалення завдань; доповнення до кольорів TaskFlow. */
+.tf5-panel { margin: 22px 0; padding: 20px; border: 1px solid #28435f; border-radius: 16px; background: #13243a; color: #edf4ff; }
+.tf5-panel h2 { margin: 0; color: #fff; font-size: 19px; }
+.tf5-controls-header { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 18px; flex-wrap: wrap; }
+.tf5-controls-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
+.tf5-controls-grid label { display: grid; gap: 7px; color: #d7e4f5; font-size: 13px; font-weight: 600; min-width: 0; }
+.tf5-controls-grid input, .tf5-controls-grid select { box-sizing: border-box; display: block; width: 100%; min-width: 0; min-height: 42px; padding: 10px 12px; border: 1px solid #39526f; border-radius: 9px; background: #0c1728; color: #f0f7ff; font: inherit; color-scheme: dark; }
+.tf5-search { grid-column: 1 / -1; }
+.tf5-search-row { display: flex; align-items: stretch; gap: 9px; }
+.tf5-search-row input { flex: 1; }
+.tf5-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 39px; padding: 9px 14px; border: 1px solid #526c8c; border-radius: 9px; background: #203550; color: #eff7ff; cursor: pointer; font: inherit; font-weight: 600; }
+.tf5-btn:hover { filter: brightness(1.12); }
+.tf5-danger { border-color: #b85d6a !important; color: #ffb6be !important; }
+.tf5-empty { padding: 26px; border: 1px dashed #527090; border-radius: 14px; color: #dae7f6; text-align: center; }
+.tf5-quick-filter { display: flex; align-items: center; gap: 9px; margin-top: 16px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.tf5-quick-filter input { width: 17px; height: 17px; accent-color: #39afe0; }
+@media(max-width:680px) { .tf5-panel { padding: 16px; } .tf5-controls-grid { grid-template-columns: 1fr; } .tf5-search { grid-column: auto; } .tf5-search-row { flex-direction: column; } }

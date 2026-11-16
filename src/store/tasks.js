@@ -53,3 +53,12 @@ export function setTaskPriority({ id, priority }) {
   const task = taskState.tasks.find(item => item.id === id)
   if (task) task.priority = priority
 }
+
+
+// Видалення оновлює спільний реактивний масив без перезавантаження сторінки.
+export function deleteTask(id) {
+  const index = taskState.tasks.findIndex(task => task.id === Number(id))
+  if (index === -1) return false
+  taskState.tasks.splice(index, 1)
+  return true
+}
