@@ -1,6 +1,6 @@
-# TaskFlow — КП 2.9 (Pinia)
+# TaskFlow — КП 2.10 (IndexedDB)
 
-Продовження КП 2.8: Vue 3, Framework7, Vite, PWA, Pinia.
+Продовження КП 2.9: Vue 3, Framework7, Vite, PWA, Pinia та idb.
 
 ## Запуск
 
@@ -24,7 +24,7 @@ npm run build
 - Спільні статистика й дані між головною сторінкою та сторінкою завдань
 - PWA-збірка через Vite
 
-Дані навмисно зберігаються тільки в оперативній пам'яті. Після F5 повертаються демонстраційні значення (IndexedDB — наступна робота).
+Завдання й проєкти відновлюються з IndexedDB після F5. Дані прив’язані до адреси сайту та профілю браузера. Пошук і фільтри скидаються після F5. Після першого онлайн-запуску Service Worker дозволяє відкрити PWA без мережі.
 
 GitHub: https://github.com/Oleksii478/taskflow-kp-2-5
 Cloudflare: https://taskflow-kp-2-5.minkevicoleksij-7ec.workers.dev

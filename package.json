@@ -1,5 +1,5 @@
 {
-  "name": "taskflow-kp-2-9",
+  "name": "taskflow-kp-2-10",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -10,21 +10,22 @@
     "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
-    "vue": "^3.5.22",
+    "@vue/devtools-api": "^8.0.3",
     "framework7": "^8.3.4",
-    "framework7-vue": "^8.3.4",
     "framework7-icons": "^5.0.5",
+    "framework7-vue": "^8.3.4",
+    "idb": "^8.0.4",
     "pinia": "^3.0.3",
-    "@vue/devtools-api": "^8.0.3"
+    "vue": "^3.5.22"
   },
   "devDependencies": {
     "@vite-pwa/assets-generator": "^1.0.2",
     "@vitejs/plugin-vue": "^6.0.1",
+    "sharp": "^0.33.5",
     "vite": "^7.1.9",
     "vite-plugin-pwa": "^1.1.0",
     "workbox-window": "^7.4.0",
-    "wrangler": "^4.45.0",
-    "sharp": "^0.33.5"
+    "wrangler": "^4.45.0"
   },
   "overrides": {
     "sharp": "^0.33.5",

@@ -1,6 +1,8 @@
 <script setup>
 import { computed, nextTick, ref } from 'vue'
 import { storeToRefs } from 'pinia'
+import { persistenceState, retrySave } from '../services/persistence'
+import '../css/persistence.css'
 import AppTabbar from '../components/AppTabbar.vue'
 import TaskCard from '../components/TaskCard.vue'
 import TaskForm from '../components/TaskForm.vue'
@@ -56,6 +58,12 @@ function createProject() {
   newProjectError.value = ''
   selectedProject.value = project.id
 }
+const saveMessage = computed(() => {
+  if (persistenceState.status === 'loading') return 'Завантаження локальних даних…'
+  if (persistenceState.status === 'saving') return 'Збереження змін у IndexedDB…'
+  if (persistenceState.status === 'saved') return 'Усі зміни збережено в цьому браузері.'
+  return persistenceState.error || 'Помилка локального збереження.'
+})
 </script>
 <template>
   <f7-page name="tasks" class="tf3-page">
@@ -66,6 +74,24 @@ function createProject() {
         <h1>Керування завданнями і проєктами</h1>
         <p>Pinia синхронізує завдання та проєкти між сторінками.</p>
         <button type="button" class="tf4-new-task" @click="startCreate">+ Додати завдання</button>
+      </section>
+
+      <section
+        class="tf7-persistence"
+        :class="`tf7-persistence--${persistenceState.status}`"
+        role="status"
+        aria-live="polite"
+      >
+        <strong>Локальне збереження</strong>
+        <span>{{ saveMessage }}</span>
+        <button
+          v-if="persistenceState.canRetry"
+          type="button"
+          class="tf5-btn"
+          @click="retrySave"
+        >
+          Повторити збереження
+        </button>
       </section>
       <section class="tf5-panel tf6-project-panel" aria-label="Мої проєкти">
         <h2>Мої проєкти</h2>
